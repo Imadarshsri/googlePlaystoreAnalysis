@@ -23,17 +23,16 @@ def GooglePlaystoreRatingPrediction(request):
         print(request.POST)
         print(len(request.POST))
         last_idx = len(request.POST) - 1
-        # a = request.POST.copy()  # .items()
 
         for key, value in request.POST.items():
             a[key] = value
         del a['csrfmiddlewaretoken']
-        del a['submit']
+        del a['Submit']
         print(a)
 
         # Changing datatypes according to dataset
 
-        # Will find the saved objects and pretrained model's pickle file.
+        # Load saved objects and pretrained model's pickle file for Label Encoding and Model Prediction
         type_le = pickle.load(open('type_le.pkl', 'rb'))
         content_le = pickle.load(open('content_le.pkl', 'rb'))
         category_le = pickle.load(open('category_le.pkl', 'rb'))

@@ -1,23 +1,26 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
-<!-- Refer to this blog: https://towardsdatascience.com/creating-a-machine-learning-based-web-application-using-django-5444e0053a09 -->
+
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <link rel = "stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Google Playstore Analysis App</title>
 </head>
+
 <body>
   <div class="container">
-    <h1 style="color: #ffe7e7">Google Playstore Analysis App</h1>
+    <h1 style="color: #02084f">Google Playstore Analysis (App Rating Predictor)</h1>
     <br>
     <h3 style="color: #02084f">Please select from the below options to predict the expected rating of the app.</h3>
     <br>
   </div>
+
   <div id="container" class="container">
-    <form method="POST">{%csrf_token%} 
-      <!-- Adding input fields for features/columns -->
+    <!-- Adding input fields for features/columns -->
+    <form method="POST">{%csrf_token%}
       <!-- Category (of app) [Cat]-->
       <select name="Category" id="Category" required>
         <option value="">Category</option>
@@ -26,15 +29,19 @@
         {% endfor %}
       </select>
       <br><br>
+
       <!-- Reviews (no. of cat) [log]-->
-      <input type="number" name="Reviews" step="any" required value="" placeholder="Reviews" min="0">
+      <input type="number" name="Reviews" step="any" required value="" placeholder="Reviews" min="1">
       <br><br>
+
       <!-- Size(in kb)(of app) [log]-->
       <input type="number" name="Size" step="any" required value="" placeholder="Size(in kb)" min="11">
       <br><br>
+
       <!-- Installs (no. of installs of app) [log]-->
-      <input type="number" name="Installs" step="any" required value="" placeholder="No. of Installs" min="0">
+      <input type="number" name="Installs" step="any" required value="" placeholder="No. of Installs" min="1">
       <br><br>
+
       <!-- Type (Free or Paid) [cat]-->
       <select name="Type" id="Type" required>
         <option value="">Type of App</option>
@@ -42,9 +49,11 @@
         <option value="Paid">Paid</option>
       </select>
       <br><br>
+
       <!-- Price(in case of Paid) (app price) [as it is]-->
       <input type="number" name="Price" step="any" required value="" placeholder="Price (in $)" min="0">
       <br><br>
+
       <!-- Content Rating (app is suitable for which age group) [cat]-->
       <select name="Content Rating" id="Content Rating" required>
         <option value="">Content Rating</option>
@@ -54,22 +63,21 @@
         <option value="Mature 17+">Mature 17+</option>
         <option value="Adults only 18+">Adults only 18+</option>
         <option value="Unrated">Unrated</option>
-        <!-- {% for agegrp in content_ratings %}
-        <option value={{ agegrp|stringformat:'s' }}>{{agegrp}}</option>
-        {% endfor %} -->
       </select>
       <br><br>
-      <!-- Output-> Rating [anti-log] -->
-      <input type="submit" value="submit" name="submit">
+
+      <input type="Submit" value="Submit" name="Submit">
     </form>
     <br>
 
     <!-- Showing Output -->
+    <!-- Output-> Rating [anti-log] -->
     {% if d%}
     {%else%}
-    <label for="Rating">Expected Rating of the App</label>
+    <label id="output" for="Rating">Expected Rating of the App </label>
     <input type="text" name="" value="{{ans}}" disabled>
     {% endif %}
   </div>
 </body>
+
 </html>
